@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class WeatherCollector {
-    private static final String WEATHER_INFO_ROW_TOPIC = "weather_info_latest_raw_data";
+    private static final String WEATHER_INFO_RAW_TOPIC = "weather_info_latest_raw_data";
     private static final String GET_ALL_STATIONS = "allstations";
     private static final String GET_STATION_LATEST_DATA = "latest/{stationsId}";
     @Autowired
@@ -54,7 +54,7 @@ public class WeatherCollector {
                     .block();
             log.debug("station " + stationId + " collected data >>>>" + stationCollectedData);
          // write to kafka the data here
-            kafkaTemplate.send(WEATHER_INFO_ROW_TOPIC,stationCollectedData);
+            kafkaTemplate.send(WEATHER_INFO_RAW_TOPIC,stationCollectedData);
             log.debug("after sending the data to kafka");
 
         }
