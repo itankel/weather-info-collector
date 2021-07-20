@@ -32,7 +32,8 @@ public class WeatherCollector {
    @Scheduled(fixedDelayString = "${weatherinfo.collect.fixedDelay.in.milliseconds}")
     public void collectWeatherData() {
         WebClient weatherInfoWebClient = WebClient.create(config.getWeatherInfoUrl());
-        //TODO shall I create in the other service a more precise request - getAllStationId ? thus I will not need to extract the stationId
+
+        //use GET_ALL_STATIONS to extract all stationId
         List<Station> stationsList = weatherInfoWebClient.get()
                 .uri(GET_ALL_STATIONS)
                 .retrieve()
@@ -53,6 +54,7 @@ public class WeatherCollector {
                     .bodyToMono(StationCollectedData.class)
                     .block();
             log.debug("station " + stationId + " collected data >>>>" + stationCollectedData);
+
          // write to kafka the data here
             kafkaTemplate.send(WEATHER_INFO_RAW_TOPIC,stationCollectedData);
             log.debug("after sending the data to kafka");

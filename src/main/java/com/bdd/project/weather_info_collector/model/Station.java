@@ -25,17 +25,3 @@ public class Station {
     private String stationTarget;
 
 }
-//@JsonProperty(value = "Status")
-//	private int Status;
-//  @JsonProperty(value = "Message")
-//	private String Message;
-//  @JsonProperty(value = "Data")
-//	private String Data;
-// when this is needed ?
-// @JsonIgnore
-//	public int getStatus() {
-//		return Status;
-//	}
-//	public void setStatus(int status) {
-//		Status = status;
-//	}
